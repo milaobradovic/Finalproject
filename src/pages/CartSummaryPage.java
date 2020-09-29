@@ -1,5 +1,22 @@
 package pages;
 
-public class CartSummaryPage {
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+public class CartSummaryPage extends BasicPage{
+	
+	public CartSummaryPage(WebDriver driver, WebDriverWait waiter, JavascriptExecutor js) {
+		super(driver, waiter, js);
+	}
+	
+	public WebElement getClearAll () {
+		return this.driver.findElement(By.name("//*[@id=\'cartSummary\']/div/div[1]/a[2]"));
+	}
+	
+	public void ClearAll() {
+	this.getClearAll().click();
+	}
 }
