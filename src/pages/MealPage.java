@@ -29,11 +29,11 @@ public class MealPage extends BasicPage{
 	}
 	
 	public WebElement getFavourite () {
-		return this.driver.findElement(By.name("//*[@id=\'item_119\']/i/svg/g/path"));
+		return this.driver.findElement(By.id("item_119"));
 	}
 	
 	public WebElement getAddToCartbtn () {
-		return this.driver.findElement(By.name("//*[@id=\'body\']/section[1]/div/div/div[2]/div/div[3]/div[2]/a"));
+		return this.driver.findElement(By.linkText("Add To Cart"));
 	}
 	
 	public void AddToCart(int mealquantity) {

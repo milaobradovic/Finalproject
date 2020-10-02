@@ -29,8 +29,10 @@ public class LoginPage extends BasicPage{
 	}
 
 	public void UserLogin(String email, String password){
+		this.getEmail().clear();
 		this.getEmail().sendKeys(email);
 		this.getEmail().click();
+		this.getPassword().clear();
 		this.getPassword().sendKeys(password);
 		this.getPassword().click();
 		this.getRememberMe().click();

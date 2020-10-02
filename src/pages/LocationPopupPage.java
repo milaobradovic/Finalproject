@@ -17,7 +17,7 @@ public class LocationPopupPage extends BasicPage{
 	}
 	
 	public WebElement getClose () {
-		return this.driver.findElement(By.xpath("/html/body/div[1]/div/div/div/div/a"));
+		return this.driver.findElement(By.xpath("//*[@id=\'location-popup\']/div/div/div/div/a"));
 	}
 	
 	public WebElement getKeyword () {

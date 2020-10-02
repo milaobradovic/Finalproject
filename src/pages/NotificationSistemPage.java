@@ -14,9 +14,8 @@ public class NotificationSistemPage extends BasicPage{
 	}
 	
 	public WebElement getMessageElement () {
-		return this.driver.findElement(By.xpath
-				("//*[contains(@class, 'alert--success') or contains(@class, 'alert--danger')][contains(@style,'display: block')]\r\n" + 
-				""));
+		return this.driver.findElement(By.xpath("//*[contains(@class, 'alert--success') or contains(@class, "
+				+ "'alert--danger')][contains(@style,'display: block')]\r\n" + ""));
 	}
 	
 	public String MessageText () {
@@ -24,7 +23,10 @@ public class NotificationSistemPage extends BasicPage{
 	}
 
 	public void NoMessage () {
-		this.waiter.until(ExpectedConditions.attributeToBe(By.xpath("//*[contains(@class, 'system_message')]"), "style", "display: none;"));
+		//this.waiter.until(ExpectedConditions.attributeToBe(By.xpath("//*[contains(@class, 'system_message')]"), "style", "display: none;"));
+		
+		this.waiter.until(ExpectedConditions.attributeContains(By.xpath("//*[contains(@class, 'system_message')]"), "style", "display: none;"));
+		
 	}
 
 }

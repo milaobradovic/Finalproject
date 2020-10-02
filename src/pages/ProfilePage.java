@@ -1,6 +1,7 @@
 package pages;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -53,7 +54,7 @@ public class ProfilePage extends BasicPage{
 	}
 	
 	public Select getCity () {
-		WebElement city=this.driver.findElement(By.id("user_city_id"));
+		WebElement city=this.driver.findElement(By.id("user_city"));
 		Select selectcity=new Select(city);
 		return selectcity;
 	}
@@ -63,32 +64,29 @@ public class ProfilePage extends BasicPage{
 	}
 	
 	public WebElement getUploadPicture () {
-		return this.driver.findElement(By.xpath("//*[@id=\'profileInfo\']/div/div[1]/div/a[1]"));
+		return this.driver.findElement(By.xpath("//*[@id=\'profileInfo\']/div/div[1]/div/a[1]/i"));
 	}
 	
 	public WebElement getRemovePicture () {
-		return this.driver.findElement(By.xpath("//*[@id=\'profileInfo\']/div/div[1]/div/a[2]/i"));
+		return this.driver.findElement(By.className("remove"));
 	}
 	
-	public void deletePicture () {
-		js=(JavascriptExecutor)driver;
-		js.executeAsyncScript("arguments[0].click();",this.getRemovePicture());
-	}
-	
-	//public void uploadPicture (String fileName) {
-	//	js=(JavascriptExecutor)driver;
-	//	js.executeAsyncScript("arguments[0].click();",this.getUploadPicture());
-	//}
-	
-	public void uploadPicture (String path2file) throws Exception{
-		js=(JavascriptExecutor)driver;
-		js.executeAsyncScript("arguments[0].click();",this.getUploadPicture());
-		String PicturePath=new File(path2file).getCanonicalPath();
-		getUploadPicture().sendKeys(PicturePath);
+	public void uploadPicture () throws IOException{
+	WebElement UploadBtn= this.driver.findElement(By.className("upload"));
+	js.executeScript("arguments[0].click();",UploadBtn);
+	String imagePath=new File("images/koala.jpg").getCanonicalPath();
+	this.driver.findElement(By.xpath("//input[@type='file']")).sendKeys(imagePath);
 }
 	
 	
-	public void changeBasicInformations (String FirstName, String LastName, String Address, String Phone, String ZipCode, String Country, String State, String City) throws InterruptedException {
+	public void deletePicture () {
+		js=(JavascriptExecutor)driver;
+		js.executeScript("arguments[0].click();",this.getRemovePicture());
+		
+	}
+		
+	
+	public void changeBasicInformations (String FirstName, String LastName, String Address, String PhoneNo, String ZipCode, String Country, String State, String City) throws InterruptedException {
 	this.getFirstName().clear();
 	this.getFirstName().sendKeys(FirstName);
 	this.getLastName().clear();
@@ -96,13 +94,16 @@ public class ProfilePage extends BasicPage{
 	this.getAddress().clear();
 	this.getAddress().sendKeys(Address);
 	this.getPhoneNo().clear();
-	this.getPhoneNo().sendKeys(Phone);
+	this.getPhoneNo().sendKeys(PhoneNo);
 	this.getZipCode().clear();
 	this.getZipCode().sendKeys(ZipCode);
-	this.getCountry().deselectByVisibleText(Country);
 	Thread.sleep(2000);
-	this.getState().deselectByVisibleText(State);
-	this.getCity().deselectByVisibleText(City);
+	this.getCountry().selectByVisibleText(Country);
+	Thread.sleep(2000);
+	this.getState().selectByVisibleText(State);
+	Thread.sleep(2000);
+	this.getCity().selectByVisibleText(City);
+	Thread.sleep(2000);
 	this.getSavebtn().click();
 	}
 }
