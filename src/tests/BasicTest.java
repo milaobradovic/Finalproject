@@ -22,11 +22,12 @@ import org.openqa.selenium.OutputType;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import javax.imageio.ImageIO;
 
-import org.apache.poi.hpsf.Date;
+
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -40,7 +41,6 @@ public abstract class BasicTest {
 	
 	protected WebDriver driver;
 	protected WebDriverWait wait;
-	//protected Screenshot screenshot;
 	protected JavascriptExecutor js;
 	protected String email="customer@dummyid.com";
 	protected String password="12345678a";
@@ -59,43 +59,31 @@ public abstract class BasicTest {
 
 	@BeforeClass
 	public void beforeClass(){
-	System.setProperty("webdriver.chrome.driver", "driver-lib\\chromedriver.exe");
+	System.setProperty("webdriver.chrome.driver",
+			"driver-lib\\chromedriver.exe");
+	
 	this.driver=new ChromeDriver();
-
 	driver.manage().window().maximize();
+	this.wait = new WebDriverWait(driver, 30);
 	this.driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	this.driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
-	//TakesScreenshot ts = (TakesScreenshot) driver;
-	//screenshot=new AShot().takeScreenshot(driver);
 	this.js=(JavascriptExecutor)this.driver;
-
-//	NotificationSistemPage nsp=new NotificationSistemPage(this.driver, this.wait, this.js);
-//	LocationPopupPage lpp=new LocationPopupPage(this.driver, this.wait, this.js);
-//	LoginPage lp=new LoginPage(this.driver, this.wait, this.js);
-//	MealPage mp=new MealPage(this.driver, this.wait, this.js);
-//	ProfilePage pp=new ProfilePage(this.driver, this.wait, this.js);
-	//AuthPage ap=new AuthPage(this.driver, this.wait, this.js);
-//	CartSummaryPage cp=new CartSummaryPage(this.driver, this.wait, this.js);
 	}
-	
+
 	@AfterMethod
-	public void afterMethod(ITestResult result) throws IOException{
-	//String time=new SimpleDateFormat("yyyMMddHHmm’.txt’").format(new Date());
-	//screenshots=new AShot().takeScreenshot(driver);
-	if (result.getStatus()==ITestResult.FAILURE) {
+	public void afterTest(ITestResult result) throws IOException {
+		File ts=((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);;
+		String name=new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss'.png'").format(new Date());
+	    File save=new File("screenshots/"+name);
+		if (result.getStatus() == ITestResult.FAILURE) {
+		FileHandler.copy(ts,save);
+		}
+		driver.manage().deleteAllCookies();
+		}		
 
-	TakesScreenshot ts = (TakesScreenshot) driver;
-	//File ss =ts.getScreenshotAs(OutputType.FILE);
-	//FileUtils.copyDirectory(ss, new File("./screenshots/"+time+".png"));
-	FileHandler.copy(ts.getScreenshotAs(OutputType.FILE),
-				new File("\"screenshots/\"+DateTime.now().toString(\"yyyy-dd-MM-HH-mm-ss\")+\" .png"));
-	//ImageIO.write(screenshots.getImage(),  "png",  new File("screenshots/"+DateTime.now().toString("yyyy-dd-MM-HH-mm-ss")+" .png"));	"
-	}
-	this.driver.manage().deleteAllCookies();
-	}
 	
 	@AfterClass
-	public void AfterClass(){
+	public void afterClass(){
 	this.driver.quit();
 	}
 	}
