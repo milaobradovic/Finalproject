@@ -25,10 +25,9 @@ public class LocationPopupPage extends BasicPage{
 	}
 
 	public WebElement getLocationItem(String locationName){
-		return this.driver.findElement(By.xpath("//*//li/a[contains(text(), '\" + locationName + \"')]/..\r\n" + 
-				""));	
+		return this.driver.findElement(By.xpath("//li/a[contains(text(), '" + locationName +"')]/.."));	
 	}
-
+	
 	public WebElement getLocationInput(){
 		return this.driver.findElement(By.xpath("//*[@id='location_id']"));	
 	}
@@ -43,7 +42,6 @@ public class LocationPopupPage extends BasicPage{
 
 	public void Setlocation(String locationName){
 	this.getKeyword().click();
-	this.getLocationItem(locationName);
 	js.executeScript("arguments[0].value=arguments[1]", getLocationInput(), getLocationItem(locationName));
 	js.executeScript("arguments[0].click", this.getSubmit());
 	}

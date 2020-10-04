@@ -23,10 +23,7 @@ public class NotificationSistemPage extends BasicPage{
 	}
 
 	public void NoMessage () {
-		//this.waiter.until(ExpectedConditions.attributeToBe(By.xpath("//*[contains(@class, 'system_message')]"), "style", "display: none;"));
-		
-		this.waiter.until(ExpectedConditions.attributeContains(By.xpath("//*[contains(@class, 'system_message')]"), "style", "display: none;"));
-		
+		waiter.until(ExpectedConditions.attributeContains(By.xpath("//*[contains(@class, 'system_message')]"), "style", "display: none;"));
 	}
 
 }
