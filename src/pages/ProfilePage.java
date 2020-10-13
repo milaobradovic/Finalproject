@@ -71,10 +71,9 @@ public class ProfilePage extends BasicPage{
 		return this.driver.findElement(By.className("remove"));
 	}
 	
-	public void uploadPicture () throws IOException{
+	public void uploadPicture (String imagePath) throws IOException{
 	WebElement UploadBtn= this.driver.findElement(By.className("upload"));
 	js.executeScript("arguments[0].click();",UploadBtn);
-	String imagePath=new File("images/koala.jpg").getCanonicalPath();
 	this.driver.findElement(By.xpath("//input[@type='file']")).sendKeys(imagePath);
 }
 	

@@ -20,11 +20,11 @@ public class SearchResultPage extends BasicPage{
     }
 
     public ArrayList<String> nameofMeals(){
-    	String name="";
+    	ArrayList<String> meals=new ArrayList<String>();
         for (int i=0; i<this.getSearchResults().size(); i++){
-         name=this.getSearchResults().get(i).getText();
+         meals.add(getSearchResults().get(i).getText());
         }
-     return nameofMeals();
+     return meals;
     }
 
      public int numberofSearchResults(){

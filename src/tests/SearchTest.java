@@ -56,7 +56,7 @@ public class SearchTest extends BasicTest {
 				}
 
 				int resultsnumber = (int) (numberofresults.getNumericCellValue());
-				Assert.assertEquals(resultsnumber, srp.numberofSearchResults());
+				Assert.assertEquals(resultsnumber, srp.numberofSearchResults(),"[ERROR] Search Result Order is Different!");
 
 			}
 		}

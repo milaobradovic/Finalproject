@@ -79,6 +79,7 @@ public abstract class BasicTest {
 		FileHandler.copy(ts,save);
 		}
 		driver.manage().deleteAllCookies();
+		driver.navigate().refresh();
 		}		
 
 	

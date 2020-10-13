@@ -77,8 +77,8 @@ public class ProfileTest extends BasicTest{
 	Assert.assertTrue(nsp. MessageText().contains("Login Successfull"), "[ERROR] Login failed!");
 
 	this.driver.navigate().to(this.baseUrl+"member/profile");
-
-	pp.uploadPicture();
+	String imagePath=new File("images/koala.jpg").getCanonicalPath();
+	pp.uploadPicture(imagePath);
 	Thread.sleep(2000);
 	Assert.assertTrue(nsp. MessageText().contains("Profile Image Uploaded Successfully"), "[ERROR] Profile Image Upload failed!");
 	nsp.NoMessage();
