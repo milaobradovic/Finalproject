@@ -13,11 +13,11 @@ public class LocationPopupPage extends BasicPage{
 	}
 
 	public WebElement getSelectlocation () {
-		return this.driver.findElement(By.xpath("//*[@id=\'header\']/div[1]/div/div/div[1]/div/a"));
+		return this.driver.findElement(By.xpath("//*[@class='location-selector']/a"));
 	}
 	
 	public WebElement getClose () {
-		return this.driver.findElement(By.xpath("//*[@id=\'location-popup\']/div/div/div/div/a"));
+		return this.driver.findElement(By.xpath("//*[@id='location-popup']/div/div/div/div/a"));
 	}
 	
 	public WebElement getKeyword () {
